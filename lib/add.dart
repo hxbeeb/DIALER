@@ -12,7 +12,7 @@ class MyWidget extends StatelessWidget {
         appBar: AppBar(
           title: Text("ADD NUMBER"),
           centerTitle: true,
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.pink,
           elevation: 0,
         ),
         body: Column(children: [
