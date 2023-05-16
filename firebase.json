@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "hxbeeb/fire",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
