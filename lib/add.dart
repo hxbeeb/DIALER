@@ -12,7 +12,7 @@ class MyWidget extends StatelessWidget {
         appBar: AppBar(
           title: Text("ADD NUMBER"),
           centerTitle: true,
-          backgroundColor: Colors.deepPurple,
+          backgroundColor: Colors.black,
           elevation: 0,
         ),
         body: Column(children: [
@@ -65,7 +65,6 @@ class MyWidget extends StatelessWidget {
             validator: (value) {
               if (value!.length < 10) {
                 return "enter proper number";
-                
               } else
                 return null;
             },
@@ -80,7 +79,8 @@ class MyWidget extends StatelessWidget {
                 "ADD",
               )),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30), color: Color.fromARGB(255, 228, 31, 17)),
+                  borderRadius: BorderRadius.circular(30),
+                  color: Color.fromARGB(255, 228, 31, 17)),
               width: 300,
               height: 30,
             ),
