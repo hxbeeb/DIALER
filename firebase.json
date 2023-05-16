@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "hxbeeb/fire",
+    "public": "build/web",
     "ignore": [
       "firebase.json",
       "**/.*",
