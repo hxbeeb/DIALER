@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fire/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class logout extends StatefulWidget {
@@ -10,9 +10,11 @@ class logout extends StatefulWidget {
   State<logout> createState() => _MyWidgetState();
 }
 
-class _MyWidgetState extends State<logout> {
+class _MyWidgetState extends State<logout> 
+{
   @override
   Widget build(BuildContext context) {
+    var name=FirebaseAuth.instance.currentUser!.email;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 169, 104, 104),
@@ -32,7 +34,7 @@ class _MyWidgetState extends State<logout> {
           SizedBox(
             height: 50,
           ),
-          Text("USER: COLLECTION NAME"),
+          Text("USER: $name"),
           SizedBox(
             height: 50,
           ),
