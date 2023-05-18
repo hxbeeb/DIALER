@@ -43,6 +43,7 @@ dependencies:
   firebase_auth: ^4.6.1
   email_validator: ^2.1.17
   flutter_spinkit: ^5.2.0
+  clipboard: ^0.1.3
   
   
 

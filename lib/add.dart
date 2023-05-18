@@ -33,88 +33,88 @@ class _MyWidgetState extends State<MyWidget> {
       appBar: AppBar(
         title: Text("ADD NUMBER"),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 255, 91, 146),
+        backgroundColor: const Color.fromARGB(255, 239, 164, 89),
         elevation: 0,
       ),
-      body: Column(children: [
-        SizedBox(
-          height: 100,
-        ),
-        TextFormField(
-          controller: a,
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black,
-                ),
-                borderRadius: BorderRadius.circular(10)),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black, width: 3),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            hintText: 'NAME',
-            prefixIcon: Icon(
-              Icons.person,
-              color: Colors.black,
-            ),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          SizedBox(
+            height: 100,
           ),
-        ),
-        SizedBox(
-          height: 50,
-        ),
-        TextFormField(
-          controller: b,
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black,
-                ),
-                borderRadius: BorderRadius.circular(10)),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black, width: 3),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            hintText: 'No',
-            prefixIcon: Icon(
-              Icons.call,
-              color: Colors.black,
-            ),
-          ),
-          keyboardType: TextInputType.number,
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly
-          ],
-          validator: (value) {
-            if (value!.length < 10) {
-              return "enter proper number";
-            } else
-              return null;
-          },
-        ),
-        SizedBox(
-          height: 50,
-        ),
-        InkWell(
-          child: Container(
-            child: Center(
-                child: Text(
-              "ADD",
-            )),
-            decoration: BoxDecoration(
+          TextFormField(
+            controller: a,
+            decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                  ),
+                  borderRadius: BorderRadius.circular(10)),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black, width: 3),
                 borderRadius: BorderRadius.circular(30),
-                color: Color.fromARGB(255, 228, 31, 17)),
-            width: 300,
-            height: 30,
+              ),
+              hintText: 'NAME',
+              prefixIcon: Icon(
+                Icons.person,
+                color: Colors.black,
+              ),
+            ),
           ),
-          onTap: () {
-            data();
+          SizedBox(
+            height: 50,
+          ),
+          TextFormField(
+            controller: b,
+            decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                  ),
+                  borderRadius: BorderRadius.circular(10)),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.black, width: 3),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              hintText: 'No',
+              prefixIcon: Icon(
+                Icons.call,
+                color: Colors.black,
+              ),
+            ),
+            keyboardType: TextInputType.number,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            validator: (value) {
+              if (value!.length < 10) {
+                return "enter proper number";
+              } else
+                return null;
+            },
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          InkWell(
+            child: Container(
+              child: Center(
+                  child: Text(
+                "ADD",
+              )),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Color.fromARGB(255, 249, 138, 97)),
+              width: 300,
+              height: 30,
+            ),
+            onTap: () {
+              data();
 
-            Navigator.pop(context);
-          },
-        )
-      ]),
-      backgroundColor: Color.fromARGB(255, 255, 154, 187),
+              Navigator.pop(context);
+            },
+          )
+        ]),
+      ),
+      backgroundColor: Color.fromARGB(255, 255, 156, 119),
     );
   }
 }

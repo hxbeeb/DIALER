@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:fire/logout.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -113,9 +114,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemCount: items?.length,
                     itemBuilder: (context, Index) {
                       return Card(
+                        color: Color.fromARGB(255, 212, 151, 122),
                         child: ListTile(
                           title: Text(items?[Index]["NAME"] ?? "UNKNOWN"),
                           subtitle: Text(items?[Index]["No"] ?? "UNAVAILABLE"),
+                          onLongPress: () async {
+                            await FlutterClipboard.copy(FirebaseFirestore
+                                .instance
+                                .collection("$user")
+                                .doc(snapshot.data!.docs[Index].get("No"))
+                                .id);
+                          },
                           leading: CircleAvatar(
                             child: InkWell(
                               onDoubleTap: () {
@@ -131,7 +140,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                               onPressed: () {
                                                 FirebaseFirestore.instance
                                                     .collection("$user")
-                                                    .doc(snapshot.data!.docs[Index].id)
+                                                    .doc(snapshot
+                                                        .data!.docs[Index].id)
                                                     .delete();
 
                                                 Navigator.pop(context);
@@ -153,23 +163,33 @@ class _MyHomePageState extends State<MyHomePage> {
                           trailing: Container(
                             child: Row(
                               children: [
-                                // Container(
-                                //   child: IconButton(
-                                //     icon: Icon(Icons.call),
-                                //     onPressed: () {
-                                //       FlutterPhoneDirectCaller.callNumber("9032789348");
-                                //     },
-                                //   ),
-                                // ),
                                 SizedBox(
-                                  width: 100,
+                                  width: 50,
+                                ),
+                                Container(
+                                  child: IconButton(
+                                    icon: Icon(Icons.copy),
+                                    onPressed: () async {
+                                      var v = Text(FirebaseFirestore.instance
+                                          .collection("$user")
+                                          .doc(snapshot.data!.docs[Index]
+                                              .get("No"))
+                                          .id);
+                                      print("copied");
+                                      print(v);
+                                      FlutterClipboard.copy(v as String);
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20,
                                 ),
                                 Container(
                                     child: IconButton(
                                   icon: Icon(Icons.call),
                                   onPressed: () {
                                     FlutterPhoneDirectCaller.callNumber(
-                                        items![Index]["No"] ?? "");
+                                        items![Index]["No"]);
                                   },
                                 ))
                               ],
@@ -186,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text("NO DATA"),
                   );
                 } else
-                  return Center(child: Text("NO DATA"));
+                  return Center(child: CircularProgressIndicator());
               }),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -271,7 +291,7 @@ class _loginState extends State<login> {
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 229, 23, 181),
+        backgroundColor: Color.fromARGB(255, 239, 164, 89),
       ),
       body: SingleChildScrollView(
           child: Column(children: <Widget>[
@@ -330,11 +350,13 @@ class _loginState extends State<login> {
           child: Container(
             child: Text(
               'Sign In',
-              style: TextStyle(color: Colors.white, fontSize: 16),
+              style:
+                  TextStyle(color: Color.fromARGB(255, 0, 0, 0), fontSize: 16),
             ),
             padding: EdgeInsets.all(7),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5), color: Colors.black),
+                borderRadius: BorderRadius.circular(5),
+                color: const Color.fromARGB(255, 249, 138, 97)),
           ),
         ),
         SizedBox(
@@ -363,7 +385,7 @@ class _loginState extends State<login> {
             },
             child: Text('signup'))
       ])),
-      backgroundColor: Color.fromARGB(255, 225, 125, 233),
+      backgroundColor: Color.fromARGB(255, 255, 156, 119),
     );
   }
 
@@ -422,7 +444,7 @@ class _signupState extends State<signup> {
           style: TextStyle(color: Colors.black),
         ), //fromARGB(255, 229, 23, 181)
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 229, 23, 181),
+        backgroundColor: Color.fromARGB(255, 239, 164, 89),
       ),
       body: SingleChildScrollView(
           child: Form(
@@ -521,11 +543,10 @@ class _signupState extends State<signup> {
           InkWell(
             onTap: () {
               try {
-                FirebaseAuth.instance
-                    .createUserWithEmailAndPassword(
-                        email: a.text, password: b.text);
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => loading()));
+                FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    email: a.text, password: b.text);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => loading()));
               } on FirebaseAuthException catch (e) {
                 showDialog(
                     context: context,
@@ -537,11 +558,12 @@ class _signupState extends State<signup> {
             child: Container(
               child: Text(
                 'Sign Up',
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style: TextStyle(color: Colors.black, fontSize: 16),
               ),
               padding: EdgeInsets.all(7),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5), color: Colors.black),
+                  borderRadius: BorderRadius.circular(5),
+                  color: Color.fromARGB(255, 249, 138, 97)),
             ),
           ),
           SizedBox(
@@ -556,7 +578,7 @@ class _signupState extends State<signup> {
               child: Text('Sign In'))
         ]),
       )),
-      backgroundColor: const Color.fromARGB(255, 225, 125, 233),
+      backgroundColor: const Color.fromARGB(255, 255, 156, 119),
     );
   }
 }
@@ -603,7 +625,7 @@ class _resetState extends State<reset> {
           'PASSWORD RESET',
           style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: const Color.fromARGB(255, 229, 23, 181),
+        backgroundColor: const Color.fromARGB(255, 239, 164, 89),
         centerTitle: true,
       ),
       body: Center(
@@ -632,14 +654,14 @@ class _resetState extends State<reset> {
               onPressed: send,
               child: Text(
                 'RESET',
-                style: TextStyle(color: Colors.red),
+                style: TextStyle(color: Colors.black),
               ),
-              color: Colors.black,
+              color: const Color.fromARGB(255, 249, 138, 97),
             ),
           ],
         ),
       ),
-      backgroundColor: const Color.fromARGB(255, 225, 125, 233),
+      backgroundColor: const Color.fromARGB(255, 255, 156, 119),
     );
   }
 
