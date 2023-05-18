@@ -524,9 +524,9 @@ class _signupState extends State<signup> {
               try {
                 FirebaseAuth.instance
                     .createUserWithEmailAndPassword(
-                        email: a.text, password: b.text)
-                    .then((value) => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => loading())));
+                        email: a.text, password: b.text);
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => loading()));
               } on FirebaseAuthException catch (e) {
                 showDialog(
                     context: context,
@@ -561,6 +561,17 @@ class _signupState extends State<signup> {
     );
   }
 }
+
+// Future signUp() async {
+//     await FirebaseAuth.instance
+//         .createUserWithEmailAndPassword(
+//           email: a.text.trim(),
+//           password: b.text.trim(),
+//         )
+//         .then((value) => Navigator.push(
+//             context, MaterialPageRoute(builder: (context) => mainpage())));
+//   }
+// }
 
 class Utils {
   static showSnackBar(String? text) {
